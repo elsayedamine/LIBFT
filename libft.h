@@ -6,7 +6,7 @@
 /*   By: aelsayed <aelsayed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 12:35:55 by aelsayed          #+#    #+#             */
-/*   Updated: 2025/01/29 11:22:27 by aelsayed         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:29:57 by aelsayed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdarg.h>
 # include <stdio.h>
 # include <string.h>
+# include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
 # ifndef BUFFER_SIZE
