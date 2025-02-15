@@ -93,7 +93,7 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE >= 0x7FFFFFFF)
-		return (NULL);
+		return (free(store), NULL);
 	if (!store)
 		store = ft_strndup("", 0);
 	store = fetch_segment(store, fd);
