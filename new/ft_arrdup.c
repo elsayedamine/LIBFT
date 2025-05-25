@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init.c                                          :+:      :+:    :+:   */
+/*   ft_arrdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelsayed <aelsayed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahakki <ahakki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 17:22:36 by aelsayed          #+#    #+#             */
-/*   Updated: 2025/03/12 07:36:20 by aelsayed         ###   ########.fr       */
+/*   Created: 2025/04/08 16:35:00 by ahakki            #+#    #+#             */
+/*   Updated: 2025/04/08 16:43:16 by ahakki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-// function that expects only the address of an integer or a character
-void	ft_init(int count, ...)
+char	**ft_arrdup(char **arr)
 {
-	va_list	args;
+	char	**dup;
 	int		i;
-	int		*ptr;
 
 	i = 0;
-	va_start(args, count);
-	while (i < count)
+	if (!arr)
+		return (NULL);
+	dup = (char **)malloc(sizeof(char *) * (ft_arrlen(arr) + 1));
+	if (!dup)
+		return (NULL);
+	i = 0;
+	while (arr[i])
 	{
-		ptr = va_arg(args, int *);
-		*ptr = 0;
+		dup[i] = ft_strdup(arr[i]);
+		if (!dup[i])
+			return (ft_free("2", dup), NULL);
 		i++;
 	}
-	va_end(args);
+	dup[i] = NULL;
+	return (dup);
 }

@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lstpop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aelsayed <aelsayed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 16:14:18 by aelsayed          #+#    #+#             */
-/*   Updated: 2025/03/07 00:28:42 by aelsayed         ###   ########.fr       */
+/*   Created: 2025/05/06 21:51:34 by aelsayed          #+#    #+#             */
+/*   Updated: 2025/05/06 21:51:47 by aelsayed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_lstsize(t_list *lst)
+void	ft_lstpop(t_list *node, size_t n)
 {
-	int	node_nbr;
+	t_list	*head;
+	t_list	*tmp;
 
-	node_nbr = 0;
-	while (lst != NULL)
+	if (!node || !node->next)
+		return ;
+	head = node;
+	node = node->next;
+	tmp = NULL;
+	while (node && n--)
 	{
-		node_nbr++;
-		lst = lst->next;
+		tmp = node->next;
+		free(node->content);
+		free(node);
+		node = tmp;
 	}
-	return (node_nbr);
+	head->next = node;
 }

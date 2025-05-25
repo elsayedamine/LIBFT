@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   ft_arr2list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aelsayed <aelsayed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 10:06:32 by aelsayed          #+#    #+#             */
-/*   Updated: 2025/03/07 00:28:42 by aelsayed         ###   ########.fr       */
+/*   Created: 2025/04/20 17:00:55 by aelsayed          #+#    #+#             */
+/*   Updated: 2025/04/20 17:03:01 by aelsayed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+t_list	*ft_arr2list(char **arr)
 {
-	t_list	*store;
+	t_list	*list;
+	t_list	*new;
 
-	if (lst && *lst && del)
+	if (!arr)
+		return (NULL);
+	list = NULL;
+	while (*arr)
 	{
-		while (*lst)
-		{
-			store = (*lst)->next;
-			del((*lst)->content);
-			free(*lst);
-			*lst = store;
-		}
-		*lst = NULL;
+		new = ft_lstnew(ft_strdup(*arr));
+		if (!new)
+			return (ft_lstclear(&list, free), NULL);
+		ft_lstadd_back(&list, new);
+		arr++;
 	}
+	return (list);
 }

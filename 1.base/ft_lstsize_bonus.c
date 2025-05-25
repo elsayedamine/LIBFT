@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aelsayed <aelsayed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 10:25:23 by aelsayed          #+#    #+#             */
-/*   Updated: 2025/03/07 00:28:42 by aelsayed         ###   ########.fr       */
+/*   Created: 2024/10/24 16:14:18 by aelsayed          #+#    #+#             */
+/*   Updated: 2025/03/08 00:01:47 by aelsayed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-void	ft_lstiter(t_list *lst, int (*f)(char const *, ...))
+int	ft_lstsize(t_list *lst)
 {
-	if (lst && f)
+	int		node_nbr;
+	t_list	*tmp;
+
+	node_nbr = 0;
+	tmp = lst;
+	while (tmp != NULL)
 	{
-		while (lst)
-		{
-			f("%s$\n", (char *)lst->content);
-			lst = lst->next;
-		}
+		node_nbr++;
+		tmp = tmp->next;
 	}
+	return (node_nbr);
 }

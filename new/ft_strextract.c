@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_last.c                                         :+:      :+:    :+:   */
+/*   ft_strextract.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aelsayed <aelsayed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 19:19:34 by aelsayed          #+#    #+#             */
-/*   Updated: 2025/04/30 20:48:54 by aelsayed         ###   ########.fr       */
+/*   Created: 2025/05/11 22:59:31 by aelsayed          #+#    #+#             */
+/*   Updated: 2025/05/11 22:59:39 by aelsayed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-t_lst	*lst_last(t_lst *lst)
+char	*ft_strextract(char *str, int index, char sep)
 {
-	if (!lst)
+	int	start;
+	int	end;
+
+	if (!str || index < 0 || index >= (int)ft_strlen(str))
 		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
+	start = index;
+	end = index;
+	while (start > 0 && str[start - 1] != sep)
+		start--;
+	while (str[end] && str[end] != sep)
+		end++;
+	return (ft_substr(str, start, end - start));
 }

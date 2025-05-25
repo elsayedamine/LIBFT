@@ -6,7 +6,7 @@
 /*   By: aelsayed <aelsayed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 12:35:55 by aelsayed          #+#    #+#             */
-/*   Updated: 2025/03/07 01:32:50 by aelsayed         ###   ########.fr       */
+/*   Updated: 2025/05/24 12:41:21 by aelsayed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define TRUE 1
 # define FALSE 0
 
+# define WHITE "\t\f\r \v\n"
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4096
 # endif
@@ -39,7 +40,10 @@
 typedef struct s_list
 {
 	void			*content;
+	char			**arr;
+	int				type;
 	struct s_list	*next;
+	struct s_list	*child;
 }					t_list;
 
 typedef struct s_lst
@@ -53,14 +57,6 @@ typedef struct s_data
 	char	*s;
 	char	**arr;
 }			t_alloc;
-
-typedef struct s_type
-{
-	int		*i;
-	float	*f;
-	char	*c;
-	double	*d;
-}			t_type;
 
 // memory functions
 void	ft_init(int count, ...);
@@ -78,14 +74,18 @@ t_alloc	*ft_malloc(char *format, int len, int wd, int slen);
 // string fnctions
 size_t	ft_strlen(const char *s);
 size_t	ft_arrlen(char **arr);
+void	ft_putarr(char **arr);
+int		ft_count_char(char *str, char c);
 char	*ft_strdup(const char *src);
+char	**ft_arrdup(char **arr);
 char	*ft_strndup(const char *src, size_t n);
-char	*ft_strtok(char *str, char const *delim);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 size_t	ft_strlcat(char *dst, const char *src, size_t destsize);
 char	*ft_strchr(const char *s, int c);
 int		ft_strchr_index(const char *s, char c);
 char	*ft_strrchr(const char *s, int c);
+char	*ft_strstr(char const *str, char const *to_find);
+int		ft_stristr(char const *str, char const *to_find);
 char	*ft_strnstr(const char *str, const char *to_find, size_t len);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_strcmp(char const *s1, char const *s2);
@@ -97,6 +97,10 @@ char	*ft_strtrim(char const *s, char const *set);
 char	**ft_split(char const *s, char b);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+char	*ft_insert_char(char *str, int index, char c);
+char	*ft_strinsert(char *base, char *insert, int index);
+char	*ft_arr2str(char **arr, char sp);
+char	*ft_strextract(char *str, int index, char sep);
 
 // ft_is fuctions
 int		ft_isalpha(int c);
@@ -106,6 +110,7 @@ int		ft_isascii(int c);
 int		ft_isprint(int c);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
+int		ft_isspace(int c);
 int		ft_iswhitespace(char *str);
 
 // file desriptor
@@ -126,6 +131,15 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, int (*f)(char const *, ...));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+char	**ft_list2arr(t_list *lst);
+t_list	*ft_arr2list(char **arr);
+t_list	*ft_lstdup(t_list *head);
+t_list	*ft_lstndup(t_list *head, t_list *stop);
+t_list	*ft_lstgetnode(t_list *lst, size_t pos);
+char	*ft_lst2str(t_list *node);
+t_list	*ft_str2lst(char *str);
+void	ft_lstpop(t_list *node, size_t n);
+void	ft_lstinsert(t_list *pos, t_list *insert);
 
 // linked lists for ints
 t_lst	*lst_new(int content);

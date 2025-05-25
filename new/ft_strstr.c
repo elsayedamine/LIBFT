@@ -1,22 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_last.c                                         :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aelsayed <aelsayed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 19:19:34 by aelsayed          #+#    #+#             */
-/*   Updated: 2025/04/30 20:48:54 by aelsayed         ###   ########.fr       */
+/*   Created: 2025/04/08 10:17:59 by aelsayed          #+#    #+#             */
+/*   Updated: 2025/04/08 10:24:12 by aelsayed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-t_lst	*lst_last(t_lst *lst)
+char	*ft_strstr(char const *str, char const *to_find)
 {
-	if (!lst)
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	if (!str || !to_find)
 		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
+	if (to_find[i] == '\0')
+		return ((char *)str);
+	while (str[i])
+	{
+		while (str[i] == to_find[j])
+		{
+			i++;
+			j++;
+			if (to_find[j] == '\0')
+				return ((char *)&str[i - j]);
+		}
+		i = i - j;
+		i++;
+		j = 0;
+	}
+	return (NULL);
 }
